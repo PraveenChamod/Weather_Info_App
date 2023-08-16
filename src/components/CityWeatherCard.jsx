@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 
 const CityWeatherCard = ({
   cityName,
@@ -24,11 +25,16 @@ const CityWeatherCard = ({
     backgroundColor: bgcolor,
   };
 
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate('/');
+  };
   return (
     <div className="city_weather_card_container" onClick={onClick}>
       <div className="city_card_top" style={divStyle}>
         <div className="high_top">
-          <button className="hidddenButton">
+          <button onClick={handleNavigate} className="hidddenButton">
             <img src={require("../assets/back_button.png")} alt="back" />
           </button>
         </div>

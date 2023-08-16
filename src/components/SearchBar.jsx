@@ -16,14 +16,17 @@ const SearchBar = ({ onSearch }) => {
   return (
     <div className="searchBar-container">
       <div className="search-bar">
-        <Input
+        {/* <Input
           type="text"
           placeholder="Enter a city"
           className="searchInput"
           value={searchQuery}
           onChange={handleInputChange}
-        />
-        <button className="searchButton">Search</button>
+        /> */}
+        <div className="textfieldclass">
+          <p className="addcity"></p>
+        </div>  
+        <button className="searchButton">Add City</button>
       </div>
     </div>
   );

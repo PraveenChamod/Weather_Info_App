@@ -6,7 +6,7 @@
   box-sizing: inherit;
 }
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   box-sizing: border-box;
   flex: 1;
   display: flex;
@@ -21,8 +21,6 @@ body {
   flex-direction: column;
 }
 
-
-
 /* Styles for logo */
 .logo {
   margin-top: 3rem;
@@ -34,7 +32,7 @@ body {
 }
 .logoText {
   margin-left: 1rem;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 29px;
   font-weight: 600;
   color: #ffffff;
@@ -49,11 +47,10 @@ body {
   margin: 0rem;
 }
 
-
 /* Styles for Dashboard */
 .dashboard_container {
   background-color: #1f2128;
-  background-image: url('./assets/Header_bg.png');
+  background-image: url("./assets/Header_bg.png");
   background-position: top;
   background-repeat: no-repeat;
   background-size: contain;
@@ -64,15 +61,14 @@ body {
   flex-direction: column;
 }
 
-.dashboard_card_container{
-  width:80%;
+.dashboard_card_container {
+  width: 80%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   margin-top: 3rem;
   margin-bottom: 3rem;
 }
-
 
 /* Styles for footer */
 .footer_container {
@@ -86,13 +82,13 @@ body {
 /* Media query for smaller screens */
 @media (max-width: 768px) {
   .footer_container {
-    min-height: 5rem; /* Adjust height for smaller screens */
-    padding: 1rem; /* Add some padding to the content */
-    text-align: center; /* Center align text on smaller screens */
+    min-height: 5rem;
+    padding: 1rem;
+    text-align: center;
   }
 }
-.footer_styles{
-  font-family: 'Open Sans', sans-serif;
+.footer_styles {
+  font-family: "Open Sans", sans-serif;
   font-size: 16px;
 }
 
@@ -109,7 +105,7 @@ body {
 
 .card_top {
   flex: 0 1 60%;
-  background-image: url('./assets/Cloud_bg.png');
+  background-image: url("./assets/Cloud_bg.png");
   background-size: contain;
   background-position: bottom;
   background-repeat: no-repeat;
@@ -121,44 +117,130 @@ body {
 
 .city {
   font-size: 29px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .city {
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 576px) {
+  .city {
+    font-size: 1.2rem; 
+  }
 }
 
 .time {
   font-size: 16px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
+}
+@media (max-width: 768px) {
+  .time {
+    font-size: 0.9rem;
+  }
+}
+@media (max-width: 576px) {
+  .time {
+    font-size: 0.8rem;
+  }
 }
 
 .weather {
   font-size: 19px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   display: flex;
   flex-direction: row;
 }
+@media (max-width: 768px) {
+  .weather {
+    font-size: 1rem;
+    flex-direction: column; 
+    text-align: center;
+  }
+}
+
+
 .imageStatus {
   margin-right: 1rem;
 }
+@media (max-width: 768px) {
+  .imageStatus {
+    margin-right: 0.5rem; 
+  }
+}
+@media (max-width: 576px) {
+  .imageStatus {
+    margin-right: 0.3rem;
+  }
+}
+
+
 .temp {
   font-size: 64px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 600;
+}
+@media (max-width: 768px) {
+  .temp {
+    font-size: 3rem;
+  }
+}
+@media (max-width: 576px) {
+  .temp {
+    font-size: 2.5rem;
+  }
 }
 
 .tempValue {
   font-size: 16px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 600;
 }
+@media (max-width: 768px) {
+  .tempValue {
+    font-size: 0.9rem;
+  }
+}
+@media (max-width: 576px) {
+  .tempValue {
+    font-size: 0.8rem;
+  }
+}
+
 .title {
   font-size: 16px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 600;
 }
+@media (max-width: 768px) {
+  .title {
+    font-size: 0.9rem;
+  }
+}
+@media (max-width: 576px) {
+  .title {
+    font-size: 0.8rem;
+  }
+}
+
+
 .value {
   font-size: 16px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 600;
+}
+@media (max-width: 768px) {
+  .value {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .value {
+    font-size: 0.8rem; 
+  }
 }
 
 .card_top--left {
@@ -167,7 +249,6 @@ body {
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
-
 }
 
 .card_top--right {
@@ -176,7 +257,6 @@ body {
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
-
 }
 
 .card_bottom {
@@ -187,7 +267,6 @@ body {
   width: 100%;
   padding: 1rem;
   border-radius: 0px 0px 10px 10px;
-
 }
 
 .group {
@@ -222,9 +301,8 @@ body {
   justify-content: center;
 }
 
-
 /*SearchBar components styles*/
-.search-bar{
+.search-bar {
   display: flex;
   flex-direction: row;
 }
@@ -232,7 +310,7 @@ body {
   background-color: #1f2128;
   color: #ffffff;
   font-size: 16px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 600;
   padding: 0.25rem 1rem 0.25rem 1rem;
   border-radius: 8px;
@@ -242,11 +320,22 @@ body {
   margin-left: -1rem;
   border-radius: 8px;
   font-size: 16px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 600;
   color: #ffffff;
   padding: 0.25rem 1rem 0.25rem 1rem;
   box-shadow: none;
+}
+.textfieldclass {
+  background-color: #1f2128;
+  border-radius: 8px;
+  width: 150px;
+  padding: 0.5rem;
+}
+.addcity {
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  color: #ffffff;
 }
 
 /*View Weather page styles*/
@@ -264,7 +353,7 @@ body {
 }
 .view_weather_container {
   background-color: #1f2128;
-  background-image: url('./assets/Header_bg.png');
+  background-image: url("./assets/Header_bg.png");
   background-position: top;
   background-repeat: no-repeat;
   background-size: contain;
@@ -281,8 +370,8 @@ body {
   padding: 2rem;
   border-radius: 10px 10px 0px 0px;
 }
-.View_card_container{
-  width:80%;
+.View_card_container {
+  width: 80%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -293,7 +382,6 @@ body {
   padding: 1rem;
   justify-content: left;
   align-items: left;
-
 }
 .middle_top {
   padding: 1rem;
@@ -307,7 +395,7 @@ body {
   display: flex;
   flex-direction: row;
 }
-.lower_row_first{
+.lower_row_first {
   flex: 0 1 50%;
   border-right: 2px solid #ffffff;
   padding: 1rem;
@@ -316,7 +404,7 @@ body {
   display: flex;
   flex-direction: column;
 }
-.lower_row_second{
+.lower_row_second {
   flex: 0 1 50%;
   padding: 1rem;
   justify-content: center;
@@ -324,11 +412,11 @@ body {
   display: flex;
   flex-direction: column;
 }
-.hidddenButton{
+.hidddenButton {
   background-color: transparent;
   border-radius: 8px;
+  border-color: transparent;
   justify-content: left;
   align-items: left;
   margin-right: 100%;
 }
-

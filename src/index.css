@@ -1,13 +1,334 @@
-body {
+*,
+*::after,
+*::before {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: inherit;
+}
+body {
+  font-family: 'Open Sans', sans-serif;
+  box-sizing: border-box;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.my_app {
+  flex: 1;
+  height: 100%;
+  justify-self: stretch;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+
+/* Styles for logo */
+.logo {
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
+.logoText {
+  margin-left: 1rem;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 29px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* Styles for search bar */
+.searchBar-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0rem;
+}
+
+
+/* Styles for Dashboard */
+.dashboard_container {
+  background-color: #1f2128;
+  background-image: url('./assets/Header_bg.png');
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: flex;
+  justify-content: center;
+  height: 150%;
+  align-items: center;
+  flex-direction: column;
+}
+
+.dashboard_card_container{
+  width:80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+
+/* Styles for footer */
+.footer_container {
+  min-height: 7rem;
+  background-color: #30333d;
+  color: #f1f1f1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .footer_container {
+    min-height: 5rem; /* Adjust height for smaller screens */
+    padding: 1rem; /* Add some padding to the content */
+    text-align: center; /* Center align text on smaller screens */
+  }
+}
+.footer_styles{
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+}
+
+/* Styles for weather card */
+.weather_card_container {
+  flex: 0 1 65%;
+  /* margin: 1.5rem; */
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+  /* width: 579px;
+  height: 217px; */
+}
+
+.card_top {
+  flex: 0 1 60%;
+  background-image: url('./assets/Cloud_bg.png');
+  background-size: contain;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  display: flex;
+  text-align: center;
+  padding: 2rem 0;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.city {
+  font-size: 29px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+}
+
+.time {
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.weather {
+  font-size: 19px;
+  font-family: 'Open Sans', sans-serif;
+  display: flex;
+  flex-direction: row;
+}
+.imageStatus {
+  margin-right: 1rem;
+}
+.temp {
+  font-size: 64px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+}
+
+.tempValue {
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+}
+.title {
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+}
+.value {
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+}
+
+.card_top--left {
+  flex: 0 1 50%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+
+}
+
+.card_top--right {
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+
+}
+
+.card_bottom {
+  flex: 1;
+  background-color: #383b47;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0px 0px 10px 10px;
+
+}
+
+.group {
+  display: flex;
+  margin: 0.2rem;
+  font-size: 1.2rem;
+}
+
+.card_bottom--left {
+  flex: 0 1 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.card_bottom--center {
+  flex: 0 1 30%;
+  border-right: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card_bottom--right {
+  flex: 0 1 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/*SearchBar components styles*/
+.search-bar{
+  display: flex;
+  flex-direction: row;
+}
+.searchInput {
+  background-color: #1f2128;
+  color: #ffffff;
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  padding: 0.25rem 1rem 0.25rem 1rem;
+  border-radius: 8px;
+}
+.searchButton {
+  background-color: #6c5dd3;
+  margin-left: -1rem;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  color: #ffffff;
+  padding: 0.25rem 1rem 0.25rem 1rem;
+  box-shadow: none;
+}
+
+/*View Weather page styles*/
+.city_weather_card_container {
+  flex: 0 1 65%;
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+  width: 1201px;
+  height: 597px;
+}
+.view_weather_logo {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.view_weather_container {
+  background-color: #1f2128;
+  background-image: url('./assets/Header_bg.png');
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.city_card_top {
+  flex: 0 1 66%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 2rem;
+  border-radius: 10px 10px 0px 0px;
+}
+.View_card_container{
+  width:80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+.high_top {
+  padding: 1rem;
+  justify-content: left;
+  align-items: left;
+
+}
+.middle_top {
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+.low_top {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+.lower_row_first{
+  flex: 0 1 50%;
+  border-right: 2px solid #ffffff;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.lower_row_second{
+  flex: 0 1 50%;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.hidddenButton{
+  background-color: transparent;
+  border-radius: 8px;
+  justify-content: left;
+  align-items: left;
+  margin-right: 100%;
+}
+

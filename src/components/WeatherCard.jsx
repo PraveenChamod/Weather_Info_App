@@ -21,7 +21,7 @@ const Card = ({
   bgcolor,
 }) => {
   const divStyle = {
-    backgroundColor: bgcolor
+    backgroundColor: bgcolor,
   };
 
   return (
@@ -36,11 +36,7 @@ const Card = ({
           </div>
           <div className="weather">
             <div className="imageStatus">
-              <img
-                src={statusImg}
-                alt="arrow"
-                style={{ width: "26px" }}
-              />
+              <img src={statusImg} alt="arrow" style={{ width: "26px" }} />
             </div>
             <p>{status}</p>
           </div>

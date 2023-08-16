@@ -25,7 +25,7 @@ const SearchBar = ({ onSearch }) => {
         /> */}
         <div className="textfieldclass">
           <p className="addcity"></p>
-        </div>  
+        </div>
         <button className="searchButton">Add City</button>
       </div>
     </div>

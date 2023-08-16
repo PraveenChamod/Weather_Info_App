@@ -12,7 +12,7 @@ function App() {
           <Route exact path="/" element={<Dashboard />} />
           <Route exact path="/:CityCode" element={<ViewWeather />} />
         </Routes>
-        <Footer />
+        <Footer/>
       </div>
     </Router>
   );

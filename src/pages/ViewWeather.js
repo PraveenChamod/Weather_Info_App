@@ -11,8 +11,13 @@ const ViewWeather = () => {
     return cityDataList.find((city) => city.id === parseInt(CityCode));
   };
 
+  // Check if cached data exists in localStorage
+  const cachedData = JSON.parse(localStorage.getItem('data'));
+  const cityDataFromCache = findCityDataById(cachedData?.list || [], CityCode);
+
   const cityData = useSelector((state) =>
-    findCityDataById(state.weather.data.list, CityCode)
+    // findCityDataById(state.weather.data.list, CityCode)
+    cityDataFromCache || findCityDataById(state.weather.data?.list || [], CityCode)
   );
 
   if (!cityData) {
@@ -44,7 +49,7 @@ const ViewWeather = () => {
           windDegree={cityData.wind.deg}
           tempMin={cityData.main.temp_min}
           tempMax={cityData.main.temp_max}
-          time={new Date(cityData.dt * 1000).toLocaleTimeString()}
+          time={new Date().toLocaleTimeString()}
           bgcolor={getCardColor(0)}
         />
       </div>

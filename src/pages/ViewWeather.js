@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import CityWeatherCard from "../components/CityWeatherCard";
 import Logo from "../components/Logo";
 
-
 const ViewWeather = () => {
   const { CityCode } = useParams();
   const findCityDataById = (cityDataList, CityCode) => {
@@ -12,12 +11,14 @@ const ViewWeather = () => {
   };
 
   // Check if cached data exists in localStorage
-  const cachedData = JSON.parse(localStorage.getItem('data'));
+  const cachedData = JSON.parse(localStorage.getItem("data"));
   const cityDataFromCache = findCityDataById(cachedData?.list || [], CityCode);
 
-  const cityData = useSelector((state) =>
-    // findCityDataById(state.weather.data.list, CityCode)
-    cityDataFromCache || findCityDataById(state.weather.data?.list || [], CityCode)
+  const cityData = useSelector(
+    (state) =>
+      // findCityDataById(state.weather.data.list, CityCode)
+      cityDataFromCache ||
+      findCityDataById(state.weather.data?.list || [], CityCode)
   );
 
   if (!cityData) {

@@ -52,16 +52,13 @@ const Card = ({
       <div className="card_bottom">
         <div className="card_bottom--left">
           <div className="group">
-            <p className="title">Pressure:</p> &nbsp;
-            <p className="value">{pressure}Pa</p>
+            <p className="title">Pressure: {pressure}Pa</p>
           </div>
           <div className="group">
-            <p className="title">Humidity:</p> &nbsp;
-            <p className="value">{humidity}%</p>
+            <p className="title">Humidity: {humidity}%</p>
           </div>
           <div className="group">
-            <p className="title">Visibility:</p> &nbsp;{" "}
-            <p className="value">{visibility}Km</p>
+            <p className="title">Visibility: {visibility}Km</p>
           </div>
         </div>
         <div className="card_bottom--center">
@@ -76,15 +73,13 @@ const Card = ({
         </div>
         <div className="card_bottom--right">
           <div className="group">
-            <p className="title">Sunrise:</p> &nbsp;
-            <p className="value">
-              {new Date(sunrise * 1000).toLocaleTimeString()}
+            <p className="title">
+              Sunrise: {new Date(sunrise * 1000).toLocaleTimeString()}
             </p>
           </div>
           <div className="group">
-            <p className="title">Sunset:</p> &nbsp;
-            <p className="value">
-              {new Date(sunset * 1000).toLocaleTimeString()}
+            <p className="title">
+              Sunset: {new Date(sunset * 1000).toLocaleTimeString()}
             </p>
           </div>
         </div>

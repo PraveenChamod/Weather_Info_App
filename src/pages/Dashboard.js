@@ -37,9 +37,21 @@ const Dashboard = () => {
         <div>Error: {error}</div>
       ) : (
         <div className="dashboard_card_container">
-          <Grid container spacing={5}>
+          <Grid spacing={0} container align="center">
             {data?.list?.map((data, idx) => (
-              <Grid item xs={12} sm={4} md={6} key={idx}>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={6}
+                key={idx}
+                sx={{
+                  paddingLeft: 2,
+                  paddingRight: 2,
+                  paddingTop: 2,
+                  paddingBottom: 2,
+                }}
+              >
                 <WeatherCard
                   cityName={CityList.List[idx].CityName}
                   countryName={data.sys.country}

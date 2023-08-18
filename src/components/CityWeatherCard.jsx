@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const CityWeatherCard = ({
   cityName,
@@ -28,7 +28,7 @@ const CityWeatherCard = ({
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    navigate('/');
+    navigate("/");
   };
   return (
     <div className="city_weather_card_container" onClick={onClick}>
@@ -47,32 +47,33 @@ const CityWeatherCard = ({
         <div className="low_top">
           <div className="lower_row_first">
             <div className="imageStatus">
-              <img src={statusImg} alt="statusImage" style={{ width: "26px" }} />
+              <img
+                src={statusImg}
+                alt="statusImage"
+                style={{ width: "26px" }}
+              />
             </div>
             <p>{status}</p>
           </div>
           <div className="lower_row_second">
-          <p className="temp">{temp}°C</p>
-          <div>
-            <p className="tempValue">Temp Min: {tempMin}°C</p>
-            <p className="tempValue">Temp Max: {tempMax}°C</p>
-          </div>
+            <p className="temp">{temp}°C</p>
+            <div>
+              <p className="tempValue">Temp Min: {tempMin}°C</p>
+              <p className="tempValue">Temp Max: {tempMax}°C</p>
+            </div>
           </div>
         </div>
       </div>
       <div className="card_bottom">
         <div className="card_bottom--left">
           <div className="group">
-            <p className="title">Pressure:</p> &nbsp;
-            <p className="value">{pressure}Pa</p>
+            <p className="title">Pressure: {pressure}Pa</p>
           </div>
           <div className="group">
-            <p className="title">Humidity:</p> &nbsp;
-            <p className="value">{humidity}%</p>
+            <p className="title">Humidity: {humidity}%</p>
           </div>
           <div className="group">
-            <p className="title">Visibility:</p> &nbsp;{" "}
-            <p className="value">{visibility}Km</p>
+            <p className="title">Visibility: {visibility}Km</p>
           </div>
         </div>
         <div className="card_bottom--center">
@@ -87,22 +88,21 @@ const CityWeatherCard = ({
         </div>
         <div className="card_bottom--right">
           <div className="group">
-            <p className="title">Sunrise:</p> &nbsp;
-            <p className="value">
-              {new Date(sunrise * 1000).toLocaleTimeString()}
+            <p className="title">
+              Sunrise: {new Date(sunrise * 1000).toLocaleTimeString()}
             </p>
+            <p className="value"></p>
           </div>
           <div className="group">
-            <p className="title">Sunset:</p> &nbsp;
-            <p className="value">
-              {new Date(sunset * 1000).toLocaleTimeString()}
+            <p className="title">
+              Sunset: {new Date(sunset * 1000).toLocaleTimeString()}
             </p>
+            <p className="value"></p>
           </div>
         </div>
       </div>
     </div>
   );
 };
-
 
 export default CityWeatherCard;

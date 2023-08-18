@@ -13,11 +13,13 @@ body {
   flex-direction: column;
 }
 .my_app {
+  display: flex;
   flex: 1;
   height: 100%;
   justify-self: stretch;
   min-height: 100vh;
-  display: flex;
+  margin: 0;
+  padding: 0;
   flex-direction: column;
 }
 
@@ -30,12 +32,23 @@ body {
   justify-content: center;
   align-items: center;
 }
+@media (max-width: 767px) {
+  .logo {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+  }
+}
 .logoText {
   margin-left: 1rem;
   font-family: "Open Sans", sans-serif;
   font-size: 29px;
   font-weight: 600;
   color: #ffffff;
+}
+@media (max-width: 767px) {
+  .logoText {
+    font-size: 24px;
+  }
 }
 
 /* Styles for search bar */
@@ -46,6 +59,13 @@ body {
   align-items: center;
   margin: 0rem;
 }
+@media (max-width: 767px) {
+  .searchBar-container {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 1rem;
+  }
+}
 
 /* Styles for Dashboard */
 .dashboard_container {
@@ -53,21 +73,36 @@ body {
   background-image: url("./assets/Header_bg.png");
   background-position: top;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 100% auto;
   display: flex;
+  flex: 1;
   justify-content: center;
-  height: 150%;
   align-items: center;
   flex-direction: column;
+  overflow: hidden;
+}
+@media (max-width: 767px) {
+  .dashboard_container {
+    background-size: auto 554px;
+    height: auto;
+  }
 }
 
 .dashboard_card_container {
-  width: 80%;
+  max-width: 1200px;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  justify-items: center;
+  align-items: center;
   margin-top: 3rem;
   margin-bottom: 3rem;
+}
+@media (max-width: 767px) {
+  .dashboard_card_container {
+    max-width: 1200px;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
 }
 
 /* Styles for footer */
@@ -78,8 +113,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  bottom: 0;
+  width: 100%;
 }
-/* Media query for smaller screens */
 @media (max-width: 768px) {
   .footer_container {
     min-height: 5rem;
@@ -95,24 +131,40 @@ body {
 /* Styles for weather card */
 .weather_card_container {
   flex: 0 1 65%;
-  /* margin: 1.5rem; */
+  max-width: 579px;
   display: flex;
   flex-direction: column;
+  flex: 1;
   color: #ffffff;
-  /* width: 579px;
-  height: 217px; */
+  justify-content: center;
+}
+
+.gridStyles {
+  padding-bottom: 2;
+  padding-right: 2;
+  padding-right: 2;
+  margin-top: 2;
+  margin-left: "auto";
+  margin-right: "auto";
 }
 
 .card_top {
   flex: 0 1 60%;
   background-image: url("./assets/Cloud_bg.png");
-  background-size: contain;
   background-position: bottom;
   background-repeat: no-repeat;
+  background-size: 100% auto;
   display: flex;
   text-align: center;
   padding: 2rem 0;
   border-radius: 10px 10px 0px 0px;
+}
+@media (max-width: 767px) {
+  .card_top {
+    flex: 0 1 100%;
+    background-size: 100% auto;
+    padding: 1rem 0;
+  }
 }
 
 .city {
@@ -128,7 +180,7 @@ body {
 }
 @media (max-width: 576px) {
   .city {
-    font-size: 1.2rem; 
+    font-size: 1.2rem;
   }
 }
 
@@ -156,18 +208,17 @@ body {
 @media (max-width: 768px) {
   .weather {
     font-size: 1rem;
-    flex-direction: column; 
+    flex-direction: column;
     text-align: center;
   }
 }
-
 
 .imageStatus {
   margin-right: 1rem;
 }
 @media (max-width: 768px) {
   .imageStatus {
-    margin-right: 0.5rem; 
+    margin-right: 0.5rem;
   }
 }
 @media (max-width: 576px) {
@@ -175,7 +226,6 @@ body {
     margin-right: 0.3rem;
   }
 }
-
 
 .temp {
   font-size: 64px;
@@ -213,6 +263,8 @@ body {
   font-size: 16px;
   font-family: "Open Sans", sans-serif;
   font-weight: 600;
+  text-align: center;
+  justify-content: center;
 }
 @media (max-width: 768px) {
   .title {
@@ -225,11 +277,12 @@ body {
   }
 }
 
-
 .value {
   font-size: 16px;
   font-family: "Open Sans", sans-serif;
   font-weight: 600;
+  text-align: center;
+  justify-content: center;
 }
 @media (max-width: 768px) {
   .value {
@@ -239,7 +292,7 @@ body {
 
 @media (max-width: 576px) {
   .value {
-    font-size: 0.8rem; 
+    font-size: 0.8rem;
   }
 }
 
@@ -345,22 +398,43 @@ body {
   flex-direction: column;
   color: #ffffff;
   width: 1201px;
-  height: 597px;
 }
+@media (max-width: 768px) {
+  .city_weather_card_container {
+    width: 100%;
+    max-width: 1000px;
+  }
+}
+
 .view_weather_logo {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+}
+@media (max-width: 768px) {
+  .view_weather_logo {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .view_weather_logo {
+    margin-top: 0.1rem;
+    margin-bottom: 0.1rem;
+  }
 }
 .view_weather_container {
   background-color: #1f2128;
   background-image: url("./assets/Header_bg.png");
   background-position: top;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 100% auto;
   display: flex;
-  flex-direction: column;
+  flex: 1;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  overflow: hidden;
 }
 .city_card_top {
   flex: 0 1 66%;
@@ -371,7 +445,8 @@ body {
   border-radius: 10px 10px 0px 0px;
 }
 .View_card_container {
-  width: 80%;
+  max-width: 1201px;
+  max-height: 597px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -397,6 +472,7 @@ body {
 }
 .lower_row_first {
   flex: 0 1 50%;
+  width: 50%;
   border-right: 2px solid #ffffff;
   padding: 1rem;
   justify-content: center;
@@ -406,6 +482,7 @@ body {
 }
 .lower_row_second {
   flex: 0 1 50%;
+  width: 50%;
   padding: 1rem;
   justify-content: center;
   align-items: center;

@@ -1,37 +1,39 @@
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { WEATHER_API_URL } from "../types/APICaller";
 
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+export const fetchWeatherData = createAsyncThunk(
+  "weather/fetchData",
+  async (cityIds, { rejectWithValue }) => {
+    try {
+      const cachedData = JSON.parse(localStorage.getItem("data"));
+      const expiry = localStorage.getItem("weatherDataExpiry");
 
-import { WEATHER_API_URL } from '../types/APICaller';
+      // Use cached data if available and not expired
+      if (cachedData && expiry && Date.now() < parseInt(expiry)) {
+        return cachedData;
+      }
 
-import { LRUCache } from 'lru-cache';
+      const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
+      const response = await fetch(
+        `${WEATHER_API_URL}?id=${cityIds}&appid=${apiKey}`
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not okay.");
+      }
+      const data = await response.json();
 
+      localStorage.setItem("data", JSON.stringify(data));
+      localStorage.setItem("weatherDataExpiry", Date.now() + 5 * 60 * 1000);
 
-const cache = new LRUCache({ max: 500, maxAge: 5 * 60 * 1000 });
-
-export const fetchWeatherData = createAsyncThunk('weather/fetchData', async (cityIds, { rejectWithValue }) => {
-  
-  const cachedData = cache.get(cityIds);
-  if (cachedData) {
-    return cachedData;
-  }
-  
-  try {
-    const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
-    const response = await fetch(`${WEATHER_API_URL}?id=${cityIds}&appid=${apiKey}`);
-    if (!response.ok) {
-      throw new Error('Network response was not okay.');
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
     }
-    const data = await response.json();
-
-    cache.set(cityIds, data);
-    return data;
-  } catch (error) {
-    return rejectWithValue(error.message);
   }
-});
+);
 
 const weatherSlice = createSlice({
-  name: 'weather',
+  name: "weather",
   initialState: {
     data: null,
     error: null,

@@ -61,13 +61,13 @@ const Dashboard = () => {
                   pressure={data.main.pressure}
                   humidity={data.main.humidity}
                   visibility={data.visibility / 1000}
-                  sunrise={data.sys.sunrise}
-                  sunset={data.sys.sunset}
+                  sunrise={formatSunTimestamp(data.sys.sunrise)}
+                  sunset={formatSunTimestamp(data.sys.sunset)}
                   windSpeed={data.wind.speed}
                   windDegree={data.wind.deg}
                   tempMin={data.main.temp_min}
                   tempMax={data.main.temp_max}
-                  time={new Date().toLocaleTimeString()}
+                  time={formatTimestamp(data.dt)}
                   bgcolor={getCardColor(idx)}
                   onClick={() => handleCardClick(CityList.List[idx].CityCode)}
                 />
@@ -79,6 +79,25 @@ const Dashboard = () => {
     </div>
   );
 };
+
+
+function formatTimestamp(timestamp) {
+  const date = new Date(timestamp * 1000);
+  const hours = date.getHours() % 12 || 12;
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+  const period = date.getHours() >= 12 ? 'pm' : 'am';
+  const formattedDate = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  return `${hours}.${minutes}${period}, ${formattedDate}`;
+}
+function formatSunTimestamp(timestamp) {
+  const date = new Date(timestamp * 1000);
+  const hours = date.getHours() % 12 || 12;
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+  const period = date.getHours() >= 12 ? 'pm' : 'am';
+  return `${hours}.${minutes}${period}`;
+}
+
+
 
 const getCardColor = (idx) => {
   switch (idx) {

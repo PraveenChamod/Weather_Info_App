@@ -17,7 +17,6 @@ const Card = ({
   tempMax,
   time,
   onClick,
-  backImgUrl,
   bgcolor,
 }) => {
   const divStyle = {
@@ -42,23 +41,23 @@ const Card = ({
           </div>
         </div>
         <div className="card_top--right">
-          <p className="temp">{temp}°C</p>
+          <p className="temp">{temp}°c</p>
           <div>
-            <p className="tempValue">Temp Min: {tempMin}°C</p>
-            <p className="tempValue">Temp Max: {tempMax}°C</p>
+            <p className="tempValue">Temp Min: {tempMin}°c</p>
+            <p className="tempValue">Temp Max: {tempMax}°c</p>
           </div>
         </div>
       </div>
       <div className="card_bottom">
         <div className="card_bottom--left">
           <div className="group">
-            <p className="title">Pressure: {pressure}Pa</p>
+            <p className="title">Pressure: {pressure}hPa</p>
           </div>
           <div className="group">
             <p className="title">Humidity: {humidity}%</p>
           </div>
           <div className="group">
-            <p className="title">Visibility: {visibility}Km</p>
+            <p className="title">Visibility: {visibility}km</p>
           </div>
         </div>
         <div className="card_bottom--center">
@@ -68,18 +67,18 @@ const Card = ({
             style={{ width: "26px" }}
           />
           <p className="title">
-            {windSpeed}m/s {windDegree}°
+            {windSpeed}m/s {windDegree}° Degree
           </p>
         </div>
         <div className="card_bottom--right">
           <div className="group">
             <p className="title">
-              Sunrise: {new Date(sunrise * 1000).toLocaleTimeString()}
+              Sunrise: {sunrise}
             </p>
           </div>
           <div className="group">
             <p className="title">
-              Sunset: {new Date(sunset * 1000).toLocaleTimeString()}
+              Sunset: {sunset}
             </p>
           </div>
         </div>

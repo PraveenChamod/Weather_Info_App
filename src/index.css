@@ -187,15 +187,22 @@ body {
 .time {
   font-size: 16px;
   font-family: "Open Sans", sans-serif;
+  text-align: center;
+  font-weight: 400;
+  justify-content: center;
 }
 @media (max-width: 768px) {
   .time {
     font-size: 0.9rem;
+    text-align: center;
+    justify-content: center;
   }
 }
 @media (max-width: 576px) {
   .time {
     font-size: 0.8rem;
+    text-align: center;
+    justify-content: center;
   }
 }
 
@@ -337,7 +344,7 @@ body {
 }
 
 .card_bottom--center {
-  flex: 0 1 30%;
+  flex: 0 1 35%;
   border-right: 2px solid #ffffff;
   border-left: 2px solid #ffffff;
   display: flex;

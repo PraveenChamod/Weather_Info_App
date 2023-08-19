@@ -44,19 +44,36 @@ const ViewWeather = () => {
           pressure={cityData.main.pressure}
           humidity={cityData.main.humidity}
           visibility={cityData.visibility / 1000}
-          sunrise={cityData.sys.sunrise}
-          sunset={cityData.sys.sunset}
+          sunrise={formatSunTimestamp(cityData.sys.sunrise)}
+          sunset={formatSunTimestamp(cityData.sys.sunset)}
           windSpeed={cityData.wind.speed}
           windDegree={cityData.wind.deg}
           tempMin={cityData.main.temp_min}
           tempMax={cityData.main.temp_max}
-          time={new Date().toLocaleTimeString()}
+          time={formatTimestamp(cityData.dt)}
           bgcolor={getCardColor(0)}
         />
       </div>
     </div>
   );
 };
+
+function formatTimestamp(timestamp) {
+  const date = new Date(timestamp * 1000);
+  const hours = date.getHours() % 12 || 12;
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+  const period = date.getHours() >= 12 ? 'pm' : 'am';
+  const formattedDate = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  return `${hours}.${minutes}${period}, ${formattedDate}`;
+}
+
+function formatSunTimestamp(timestamp) {
+  const date = new Date(timestamp * 1000);
+  const hours = date.getHours() % 12 || 12;
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+  const period = date.getHours() >= 12 ? 'pm' : 'am';
+  return `${hours}.${minutes}${period}`;
+}
 
 const getCardStatusImageUrl = (idx) => {
   switch (idx) {

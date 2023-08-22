@@ -1,40 +1,52 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Grid } from "@mui/material";
 import WeatherCard from "../components/WeatherCard";
 import SearchBar from "../components/SearchBar";
 import Logo from "../components/Logo";
 import CityList from "./../cities.json";
 import { useNavigate } from "react-router-dom";
-import { fetchWeatherData } from "../actions/weatherStatus";
+import {
+  useGetWeatherDataQuery,
+  useRefreshWeatherDataMutation,
+} from "../redux/weatherApi";
 
 const Dashboard = () => {
   // Step 1: Extract City codes from cities.json file and load it into an array.
   const getCityCodes = () => {
     return CityList.List.map((city) => city.CityCode).join(",");
   };
+  const cityIds = getCityCodes();
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { data, isLoading, error } = useSelector((state) => state.weather);
+  // Step 2: Get the latest weather information from the servers.
+  const { data, isLoading, error } = useGetWeatherDataQuery(cityIds);
+
+  // Step 4: Refetch the data after 5 minutes expiration time
+  const [refreshWeatherData] = useRefreshWeatherDataMutation();
 
   useEffect(() => {
-    const cityIds = getCityCodes();
-    dispatch(fetchWeatherData(cityIds));
-  }, [dispatch]);
+    const refreshInterval = setInterval(() => {
+      refreshWeatherData(cityIds);
+    }, 5 * 60 * 1000);
 
+    return () => {
+      clearInterval(refreshInterval);
+    };
+  }, [cityIds, refreshWeatherData]);
+
+  const navigate = useNavigate();
   const handleCardClick = (CityCode) => {
     navigate(`/${CityCode}`);
   };
 
+  //Step 3: Display the Components
   return (
     <div className="dashboard_container">
       <Logo />
       <SearchBar />
       {isLoading ? (
-        <div>Data is Loading...</div>
+        <div className="notification">Data is Loading...</div>
       ) : error ? (
-        <div>Error: {error}</div>
+        <div className="notification">Error: {error}</div>
       ) : (
         <div className="dashboard_card_container">
           <Grid spacing={0} container align="center">
@@ -57,7 +69,7 @@ const Dashboard = () => {
                   countryName={data.sys.country}
                   statusImg={getCardStatusImageUrl(idx)}
                   status={data.weather[0].description}
-                  temp={convertKelvinToCelsius(data.main.temp)}
+                  temp={data.main.temp}
                   pressure={data.main.pressure}
                   humidity={data.main.humidity}
                   visibility={data.visibility / 1000}
@@ -80,24 +92,24 @@ const Dashboard = () => {
   );
 };
 
-
 function formatTimestamp(timestamp) {
   const date = new Date(timestamp * 1000);
   const hours = date.getHours() % 12 || 12;
-  const minutes = date.getMinutes().toString().padStart(2, '0');
-  const period = date.getHours() >= 12 ? 'pm' : 'am';
-  const formattedDate = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  const period = date.getHours() >= 12 ? "pm" : "am";
+  const formattedDate = date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+  });
   return `${hours}.${minutes}${period}, ${formattedDate}`;
 }
 function formatSunTimestamp(timestamp) {
   const date = new Date(timestamp * 1000);
   const hours = date.getHours() % 12 || 12;
-  const minutes = date.getMinutes().toString().padStart(2, '0');
-  const period = date.getHours() >= 12 ? 'pm' : 'am';
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  const period = date.getHours() >= 12 ? "pm" : "am";
   return `${hours}.${minutes}${period}`;
 }
-
-
 
 const getCardColor = (idx) => {
   switch (idx) {
@@ -143,10 +155,6 @@ const getCardStatusImageUrl = (idx) => {
     default:
       return null;
   }
-};
-
-const convertKelvinToCelsius = (temp) => {
-  return Math.round(temp - 273.15);
 };
 
 export default Dashboard;

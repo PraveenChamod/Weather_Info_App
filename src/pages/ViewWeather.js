@@ -1,77 +1,72 @@
 import React from "react";
 import { useParams } from "react-router";
-import { useSelector } from "react-redux";
 import CityWeatherCard from "../components/CityWeatherCard";
 import Logo from "../components/Logo";
+import { useGetSingleWeatherDataQuery } from "../redux/weatherApi";
 
 const ViewWeather = () => {
   const { CityCode } = useParams();
-  const findCityDataById = (cityDataList, CityCode) => {
-    return cityDataList.find((city) => city.id === parseInt(CityCode));
-  };
 
-  // Check if cached data exists in localStorage
-  const cachedData = JSON.parse(localStorage.getItem("data"));
-  const cityDataFromCache = findCityDataById(cachedData?.list || [], CityCode);
+  const {
+    data: cityData,
+    isFetching,
+    isSuccess,
+  } = useGetSingleWeatherDataQuery(CityCode);
 
-  const cityData = useSelector(
-    (state) =>
-      // findCityDataById(state.weather.data.list, CityCode)
-      cityDataFromCache ||
-      findCityDataById(state.weather.data?.list || [], CityCode)
-  );
-
-  if (!cityData) {
+  if (isFetching) {
+    return (
+      <div className="view_weather_container notification">
+        <p>City informations Loading...</p>
+      </div>
+    );
+  } else if (isSuccess) {
     return (
       <div className="view_weather_container">
-        <p>City not found.</p>
+        <div className="view_weather_logo">
+          <Logo />
+        </div>
+        <div className="View_card_container">
+          <CityWeatherCard
+            cityName={cityData.list[0].name}
+            countryName={cityData.list[0].sys.country}
+            status={cityData.list[0].weather[0].description}
+            statusImg={getCardStatusImageUrl(0)}
+            temp={cityData.list[0].main.temp}
+            pressure={cityData.list[0].main.pressure}
+            humidity={cityData.list[0].main.humidity}
+            visibility={cityData.list[0].visibility / 1000}
+            sunrise={formatSunTimestamp(cityData.list[0].sys.sunrise)}
+            sunset={formatSunTimestamp(cityData.list[0].sys.sunset)}
+            windSpeed={cityData.list[0].wind.speed}
+            windDegree={cityData.list[0].wind.deg}
+            tempMin={cityData.list[0].main.temp_min}
+            tempMax={cityData.list[0].main.temp_max}
+            time={formatTimestamp(cityData.list[0].dt)}
+            bgcolor={getCardColor(0)}
+          />
+        </div>
       </div>
     );
   }
-
-  return (
-    <div className="view_weather_container">
-      <div className="view_weather_logo">
-        <Logo />
-      </div>
-      <div className="View_card_container">
-        <CityWeatherCard
-          cityName={cityData.name}
-          countryName={cityData.sys.country}
-          status={cityData.weather[0].description}
-          statusImg={getCardStatusImageUrl(0)}
-          temp={convertKelvinToCelsius(cityData.main.temp)}
-          pressure={cityData.main.pressure}
-          humidity={cityData.main.humidity}
-          visibility={cityData.visibility / 1000}
-          sunrise={formatSunTimestamp(cityData.sys.sunrise)}
-          sunset={formatSunTimestamp(cityData.sys.sunset)}
-          windSpeed={cityData.wind.speed}
-          windDegree={cityData.wind.deg}
-          tempMin={cityData.main.temp_min}
-          tempMax={cityData.main.temp_max}
-          time={formatTimestamp(cityData.dt)}
-          bgcolor={getCardColor(0)}
-        />
-      </div>
-    </div>
-  );
 };
 
 function formatTimestamp(timestamp) {
   const date = new Date(timestamp * 1000);
   const hours = date.getHours() % 12 || 12;
-  const minutes = date.getMinutes().toString().padStart(2, '0');
-  const period = date.getHours() >= 12 ? 'pm' : 'am';
-  const formattedDate = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  const period = date.getHours() >= 12 ? "pm" : "am";
+  const formattedDate = date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+  });
   return `${hours}.${minutes}${period}, ${formattedDate}`;
 }
 
 function formatSunTimestamp(timestamp) {
   const date = new Date(timestamp * 1000);
   const hours = date.getHours() % 12 || 12;
-  const minutes = date.getMinutes().toString().padStart(2, '0');
-  const period = date.getHours() >= 12 ? 'pm' : 'am';
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  const period = date.getHours() >= 12 ? "pm" : "am";
   return `${hours}.${minutes}${period}`;
 }
 
@@ -119,10 +114,6 @@ const getCardColor = (idx) => {
     default:
       return null;
   }
-};
-
-const convertKelvinToCelsius = (temp) => {
-  return Math.round(temp - 273.15);
 };
 
 export default ViewWeather;

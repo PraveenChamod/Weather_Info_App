@@ -13,9 +13,6 @@ export const api = createApi({
       query: (cityIds) => `?id=${cityIds}&units=${units}&appid=${apiKey}`,
       providesTags: ["WeatherInfo"],
     }),
-    getSingleWeatherData: builder.query({
-      query: (cityCode) => `?id=${cityCode}&units=${units}&appid=${apiKey}`,
-    }),
     refreshWeatherData: builder.mutation({
       query: (cityIds) => `?id=${cityIds}&units=${units}&appid=${apiKey}`,
       invalidates: ["WeatherInfo"],
@@ -25,6 +22,5 @@ export const api = createApi({
 
 export const {
   useGetWeatherDataQuery,
-  useGetSingleWeatherDataQuery,
   useRefreshWeatherDataMutation,
 } = api;

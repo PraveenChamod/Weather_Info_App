@@ -4,6 +4,7 @@ import WeatherCard from "../components/WeatherCard";
 import SearchBar from "../components/SearchBar";
 import Logo from "../components/Logo";
 import CityList from "./../cities.json";
+import CityExpirationTimeList from "./../expiryTimes.json";
 import { useNavigate } from "react-router-dom";
 import {
   useGetWeatherDataQuery,
@@ -11,34 +12,52 @@ import {
 } from "../redux/weatherApi";
 
 const Dashboard = () => {
-  // Step 1: Extract City codes from cities.json file and load it into an array.
+  //Step1: Extract the CityCodes form cities.json
   const getCityCodes = () => {
     return CityList.List.map((city) => city.CityCode).join(",");
   };
+
   const cityIds = getCityCodes();
 
-  // Step 2: Get the latest weather information from the servers.
+  //Step2: Call the Api for initially fetch the weather Information
   const { data, isLoading, error } = useGetWeatherDataQuery(cityIds);
 
-  // Step 4: Refetch the data after 5 minutes expiration time
-  const [refreshWeatherData] = useRefreshWeatherDataMutation();
+  //CR: Mutation for different cities to have different expiration times
+  const [refreshWeatherMyData] = useRefreshWeatherDataMutation();
 
   useEffect(() => {
-    const refreshInterval = setInterval(() => {
-      refreshWeatherData(cityIds);
-    }, 5 * 60 * 1000);
+    const setupInterval = (cityCode, intervalTime) => {
+      const refreshInterval = setInterval(() => {
+        refreshWeatherMyData(cityCode);
+      }, intervalTime);
 
-    return () => {
-      clearInterval(refreshInterval);
+      return () => {
+        clearInterval(refreshInterval);
+      };
     };
-  }, [cityIds, refreshWeatherData]);
+    const countryList = CityExpirationTimeList.List.map((item) => ({
+      CityCode: item.CityCode,
+      ExpirationTime: item.ExpirationTime,
+    }));
+
+    const cleanupFunctions = [];
+
+    for (const { CityCode, ExpirationTime } of countryList) {
+      const cleanupFunction = setupInterval(CityCode, ExpirationTime);
+      cleanupFunctions.push(cleanupFunction);
+    }
+    return () => {
+      for (const cleanupFunction of cleanupFunctions) {
+        cleanupFunction();
+      }
+    };
+  }, [refreshWeatherMyData]);
 
   const navigate = useNavigate();
   const handleCardClick = (CityCode) => {
     navigate(`/${CityCode}`);
   };
 
-  //Step 3: Display the Components
   return (
     <div className="dashboard_container">
       <Logo />

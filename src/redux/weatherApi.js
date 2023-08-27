@@ -10,17 +10,20 @@ export const api = createApi({
   tagTypes: ["WeatherInfo"],
   endpoints: (builder) => ({
     getWeatherData: builder.query({
-      query: (cityIds) => `?id=${cityIds}&units=${units}&appid=${apiKey}`,
-      providesTags: ["WeatherInfo"],
+      query: (cityId) => `?id=${cityId}&units=${units}&appid=${apiKey}`,
+      providesTags: (data, args) =>
+        data.list.map((weatherdata) => ({
+          type: "WeatherInfo",
+          id: weatherdata.id,
+        })),
     }),
     refreshWeatherData: builder.mutation({
-      query: (cityIds) => `?id=${cityIds}&units=${units}&appid=${apiKey}`,
-      invalidates: ["WeatherInfo"],
+      query: (cityId) => `?id=${cityId}&units=${units}&appid=${apiKey}`,
+      invalidatesTags: (returnValue, args) => [
+        { type: "WeatherInfo", id: args.cityId },
+      ],
     }),
   }),
 });
 
-export const {
-  useGetWeatherDataQuery,
-  useRefreshWeatherDataMutation,
-} = api;
+export const { useGetWeatherDataQuery, useRefreshWeatherDataMutation } = api;

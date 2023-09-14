@@ -3,30 +3,10 @@ import { useParams } from "react-router";
 import CityWeatherCard from "../components/CityWeatherCard";
 import Logo from "../components/Logo";
 import { useGetWeatherDataQuery } from "../redux/weatherApi";
-import CityList from "./../cities.json";
 
 const ViewWeather = () => {
   const { CityCode } = useParams();
-
-  const getCityCodes = () => {
-    return CityList.List.map((city) => city.CityCode).join(",");
-  };
-  const cityIds = getCityCodes();
-  const {
-    data: cityData,
-    isFetching,
-    isSuccess,
-  } = useGetWeatherDataQuery(cityIds);
-
-  let singleCityData = null;
-  if (cityData) {
-    for (let i = 0; i <= cityData.cnt; i++) {
-      if (cityData.list[i].id == CityCode) {
-        singleCityData = cityData.list[i];
-        break;
-      }
-    }
-  }
+  const { data, isFetching, isSuccess } = useGetWeatherDataQuery(CityCode);
 
   if (isFetching) {
     return (
@@ -42,21 +22,21 @@ const ViewWeather = () => {
         </div>
         <div className="View_card_container">
           <CityWeatherCard
-            cityName={singleCityData.name}
-            countryName={singleCityData.sys.country}
-            status={singleCityData.weather[0].description}
+            cityName={data.list[0].name}
+            countryName={data.list[0].sys.country}
+            status={data.list[0].weather[0].description}
             statusImg={getCardStatusImageUrl(0)}
-            temp={singleCityData.main.temp}
-            pressure={singleCityData.main.pressure}
-            humidity={singleCityData.main.humidity}
-            visibility={singleCityData.visibility / 1000}
-            sunrise={formatSunTimestamp(singleCityData.sys.sunrise)}
-            sunset={formatSunTimestamp(singleCityData.sys.sunset)}
-            windSpeed={singleCityData.wind.speed}
-            windDegree={singleCityData.wind.deg}
-            tempMin={singleCityData.main.temp_min}
-            tempMax={singleCityData.main.temp_max}
-            time={formatTimestamp(singleCityData.dt)}
+            temp={data.list[0].main.temp}
+            pressure={data.list[0].main.pressure}
+            humidity={data.list[0].main.humidity}
+            visibility={data.list[0].visibility / 1000}
+            sunrise={formatSunTimestamp(data.list[0].sys.sunrise)}
+            sunset={formatSunTimestamp(data.list[0].sys.sunset)}
+            windSpeed={data.list[0].wind.speed}
+            windDegree={data.list[0].wind.deg}
+            tempMin={data.list[0].main.temp_min}
+            tempMax={data.list[0].main.temp_max}
+            time={formatTimestamp(data.list[0].dt)}
             bgcolor={getCardColor(0)}
           />
         </div>

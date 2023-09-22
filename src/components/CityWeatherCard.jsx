@@ -28,7 +28,7 @@ const CityWeatherCard = ({
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    navigate("/");
+    navigate("/Dashboard");
   };
   return (
     <div className="city_weather_card_container" onClick={onClick}>

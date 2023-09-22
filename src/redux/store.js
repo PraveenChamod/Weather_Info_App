@@ -15,7 +15,10 @@ export const store = configureStore({
     [api.reducerPath]: persistedReducer,
   },
   middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware({serializableCheck: false}).concat(api.middleware);
+    return getDefaultMiddleware({
+      serializableCheck: false,
+      immutableCheck: false,
+    }).concat(api.middleware);
   },
 });
 

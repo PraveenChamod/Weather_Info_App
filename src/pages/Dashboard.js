@@ -3,6 +3,7 @@ import { Grid } from "@mui/material";
 import WeatherCard from "../components/WeatherCard";
 import SearchBar from "../components/SearchBar";
 import Logo from "../components/Logo";
+import LogOut from "../components/LogOut";
 import CityList from "./../cities.json";
 import CityExpirationTimeList from "./../expiryTimes.json";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +11,11 @@ import {
   useGetWeatherDataQuery,
   useRefreshWeatherDataMutation,
 } from "../redux/weatherApi";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+import Footer from "../components/Footer";
+
+import { withAuthenticationRequired } from "@auth0/auth0-react";
 
 const Dashboard = () => {
   //Step1: Extract the CityCodes form cities.json
@@ -60,6 +66,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard_container">
+      <LogOut />
       <Logo />
       <SearchBar />
       {isLoading ? (
@@ -176,4 +183,15 @@ const getCardStatusImageUrl = (idx) => {
   }
 };
 
-export default Dashboard;
+export default withAuthenticationRequired(Dashboard, {
+  onRedirecting: () => (
+    <div className="my_app">
+      <div className="loading_Container">
+        <Box sx={{ display: "flex" }}>
+          <CircularProgress />
+        </Box>
+      </div>
+      <Footer />
+    </div>
+  ),
+});

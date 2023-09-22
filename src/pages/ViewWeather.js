@@ -3,6 +3,11 @@ import { useParams } from "react-router";
 import CityWeatherCard from "../components/CityWeatherCard";
 import Logo from "../components/Logo";
 import { useGetWeatherDataQuery } from "../redux/weatherApi";
+import LogOut from "../components/LogOut";
+import { withAuthenticationRequired } from "@auth0/auth0-react";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+import Footer from "../components/Footer";
 
 const ViewWeather = () => {
   const { CityCode } = useParams();
@@ -17,6 +22,7 @@ const ViewWeather = () => {
   } else if (isSuccess) {
     return (
       <div className="view_weather_container">
+        <LogOut />
         <div className="view_weather_logo">
           <Logo />
         </div>
@@ -111,4 +117,15 @@ const getCardColor = (idx) => {
   }
 };
 
-export default ViewWeather;
+export default withAuthenticationRequired(ViewWeather, {
+  onRedirecting: () => (
+    <div className="my_app">
+      <div className="loading_Container">
+        <Box sx={{ display: "flex" }}>
+          <CircularProgress />
+        </Box>
+      </div>
+      <Footer />
+    </div>
+  ),
+});

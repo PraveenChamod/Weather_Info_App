@@ -68,7 +68,7 @@ body {
 }
 
 /* Styles for Dashboard */
-.dashboard_container {
+.dashboard_container, .authentication_container, .error_Container, .loading_Container {
   background-color: #1f2128;
   background-image: url("./assets/Header_bg.png");
   background-position: top;
@@ -82,7 +82,7 @@ body {
   overflow: hidden;
 }
 @media (max-width: 767px) {
-  .dashboard_container {
+  .dashboard_container, .authentication_container {
     background-size: auto 554px;
     height: auto;
   }
@@ -505,4 +505,32 @@ body {
 .notification {
   color: #fff;
   padding-top: 1rem;
+}
+.logOutContainer {
+  margin-top: 1rem;
+  margin-right: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.logOutButton, .logInButton {
+  background-color: #6c5dd3;
+  margin-left: -1rem;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  color: #ffffff;
+  padding: 0.25rem 1rem 0.25rem 1rem;
+  box-shadow: none;
+}
+.wellcome_styles, .error_styles {
+  font-family: "Open Sans", sans-serif;
+  font-size: 18px;
+  color: #ffffff;
+  text-align: center;
+}
+.logInContainer {
+  margin-top: 1rem;
 }

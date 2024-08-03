@@ -5,12 +5,12 @@
 
 ## Initial View
 
-![Untitled-1](https://github.com/PraveenChamod/Customer_Data_API/blob/main/Customer_Data_Frontend/language_project/src/assets/Customer_List.png)
+![Untitled-1](https://github.com/PraveenChamod/Weather_Info_App/blob/development/src/assets/Initial_View.png)
 
 ## Auth0 Authentication View
 
-![Untitled-1](https://github.com/PraveenChamod/Customer_Data_API/blob/main/Customer_Data_Frontend/language_project/src/assets/Customer_List.png)
+![Untitled-1](https://github.com/PraveenChamod/Weather_Info_App/blob/development/src/assets/Auth.png)
 
 ## Admin Dashboard
 
-![Untitled-1](https://github.com/PraveenChamod/Customer_Data_API/blob/main/Customer_Data_Frontend/language_project/src/assets/Customer_List.png)
+![Untitled-1](https://github.com/PraveenChamod/Weather_Info_App/blob/development/src/assets/Dashboard.png)

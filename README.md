@@ -14,3 +14,7 @@
 ## Admin Dashboard
 
 ![Untitled-1](https://github.com/PraveenChamod/Weather_Info_App/blob/development/src/assets/Dashboard.png)
+
+## In Detail View
+
+![Untitled-1](https://github.com/PraveenChamod/Weather_Info_App/blob/development/src/assets/Card.png)
